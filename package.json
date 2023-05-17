@@ -26,6 +26,7 @@
     "css-loader": "^6.7.3",
     "eslint": "7.x",
     "eslint-config-airbnb-base": "14.x",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "2.x",
     "hint": "7.x",
     "html-webpack-plugin": "^5.5.1",
