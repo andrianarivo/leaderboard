@@ -126,7 +126,47 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.scss */ \"./src/style.scss\");\n\n\n\n//# sourceURL=webpack://webpack-template/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_DOMLoader_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/DOMLoader.js */ \"./src/modules/DOMLoader.js\");\n/* harmony import */ var _modules_addScore_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/addScore.js */ \"./src/modules/addScore.js\");\n/* harmony import */ var _modules_refresh_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/refresh.js */ \"./src/modules/refresh.js\");\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style.scss */ \"./src/style.scss\");\n\n\n\n\n\n_modules_DOMLoader_js__WEBPACK_IMPORTED_MODULE_0__.refreshBtn.addEventListener('click', () => {\n  (0,_modules_refresh_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])();\n});\n\nwindow.onload = () => {\n  (0,_modules_refresh_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])();\n};\n\n_modules_DOMLoader_js__WEBPACK_IMPORTED_MODULE_0__.btnAddScore.addEventListener('click', async () => {\n  await (0,_modules_addScore_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])();\n  await (0,_modules_refresh_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])();\n});\n\n\n//# sourceURL=webpack://webpack-template/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/modules/DOMLoader.js":
+/*!**********************************!*\
+  !*** ./src/modules/DOMLoader.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"btnAddScore\": () => (/* binding */ btnAddScore),\n/* harmony export */   \"inputScore\": () => (/* binding */ inputScore),\n/* harmony export */   \"inputUser\": () => (/* binding */ inputUser),\n/* harmony export */   \"refreshBtn\": () => (/* binding */ refreshBtn),\n/* harmony export */   \"tbody\": () => (/* binding */ tbody)\n/* harmony export */ });\nconst refreshBtn = document.querySelector('.refresh');\nconst tbody = document.querySelector('tbody');\nconst inputUser = document.querySelector('#user');\nconst inputScore = document.querySelector('#score');\nconst btnAddScore = document.querySelector('#add-score');\n\n\n\n\n//# sourceURL=webpack://webpack-template/./src/modules/DOMLoader.js?");
+
+/***/ }),
+
+/***/ "./src/modules/ScoreStore.js":
+/*!***********************************!*\
+  !*** ./src/modules/ScoreStore.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ ScoreStore)\n/* harmony export */ });\nclass ScoreStore {\n  baseAPI = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/';\n\n  endPoint = '/scores/';\n\n  gameID = 'yoHtSCwzSCh7CG99zfdN';\n\n  constructor() {\n    this.scoresArray = [];\n  }\n\n  // Get data from API\n  async getScores() {\n    const response = await fetch(`${this.baseAPI}${this.gameID}${this.endPoint}`);\n    const { result } = await response.json();\n    this.scoresArray = result;\n  }\n\n  // Add score to scoresArray\n  async addScore(_score, _user) {\n    const response = await fetch(`${this.baseAPI}${this.gameID}${this.endPoint}`, {\n      method: 'POST',\n      headers: {\n        'Content-Type': 'application/json',\n      },\n      body: JSON.stringify({\n        user: _user,\n        score: _score,\n      }),\n    });\n    return response.json();\n  }\n\n  // render\n  render() {\n    let content = '';\n    this.scoresArray.forEach((scoreItem) => {\n      content += `<tr><td>${scoreItem.user}: </td><td>${scoreItem.score}</td></tr>`;\n    });\n    return content;\n  }\n}\n\n\n//# sourceURL=webpack://webpack-template/./src/modules/ScoreStore.js?");
+
+/***/ }),
+
+/***/ "./src/modules/addScore.js":
+/*!*********************************!*\
+  !*** ./src/modules/addScore.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _DOMLoader_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DOMLoader.js */ \"./src/modules/DOMLoader.js\");\n/* harmony import */ var _ScoreStore_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScoreStore.js */ \"./src/modules/ScoreStore.js\");\n\n\n\nconst addScore = async () => {\n  const scoreStore = new _ScoreStore_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"]();\n  const user = _DOMLoader_js__WEBPACK_IMPORTED_MODULE_0__.inputUser.value;\n  const score = _DOMLoader_js__WEBPACK_IMPORTED_MODULE_0__.inputScore.value;\n\n  await scoreStore.addScore(score, user);\n\n  _DOMLoader_js__WEBPACK_IMPORTED_MODULE_0__.inputUser.value = '';\n  _DOMLoader_js__WEBPACK_IMPORTED_MODULE_0__.inputScore.value = '';\n  _DOMLoader_js__WEBPACK_IMPORTED_MODULE_0__.tbody.innerHTML = scoreStore.render();\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (addScore);\n\n\n//# sourceURL=webpack://webpack-template/./src/modules/addScore.js?");
+
+/***/ }),
+
+/***/ "./src/modules/refresh.js":
+/*!********************************!*\
+  !*** ./src/modules/refresh.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _DOMLoader_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DOMLoader.js */ \"./src/modules/DOMLoader.js\");\n/* harmony import */ var _ScoreStore_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScoreStore.js */ \"./src/modules/ScoreStore.js\");\n\n\n\nconst refresh = async () => {\n  const scoreStore = new _ScoreStore_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"]();\n\n  await scoreStore.getScores();\n\n  _DOMLoader_js__WEBPACK_IMPORTED_MODULE_0__.tbody.innerHTML = scoreStore.render();\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (refresh);\n\n\n//# sourceURL=webpack://webpack-template/./src/modules/refresh.js?");
 
 /***/ }),
 

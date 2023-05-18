@@ -12,32 +12,31 @@
         <div class="col-md-6 col-sm-12 scores">
           <div class="d-flex gap-3 mb-2">
             <h2>Recent scores</h2>
-            <button class="btn btn-dark align-self-center">Refresh</button>
+            <button class="btn btn-dark align-self-center refresh">Refresh</button>
           </div>
           <table class="table table-striped">
-            <tbody>
+            <thead class="thead-dark">
               <tr>
-                <td>Mark</td>
-                <td>Otto</td>
+                <th>User</th>
+                <th>Score</th>
               </tr>
-              <tr>
-                <td>Jacob</td>
-                <td>Thornton</td>
-              </tr>
-              <tr>
-                <td>Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
+            </thead>
+            <tbody></tbody>
           </table>
         </div>
 
         <div class="col-md-6 col-sm-12 form p-3 border-start border-dark">
           <h2>Add your scores</h2>
           <div class="d-flex flex-column gap-1">
-            <input class="form-control" name="user" type="text" placeholder="Your name" />
-            <input class="form-control" name="score" type="number" placeholder="Your score" />
-            <button class="btn btn-success align-self-end">Submit</button>
+            <input id="user" class="form-control" name="user" type="text" placeholder="Your name" />
+            <input
+              id="score"
+              class="form-control"
+              name="score"
+              type="number"
+              placeholder="Your score"
+            />
+            <button id="add-score" class="btn btn-success align-self-end">Submit</button>
           </div>
         </div>
       </div>
