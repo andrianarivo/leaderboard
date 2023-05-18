@@ -1,5 +1,41 @@
 $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
+$theme-colors: (
+  'primary': #ffa384,
+  'secondary': #74bdcb,
+  'success': #b5e5cf,
+  'light': #e7f2f8,
+  'dark': #353643,
+);
+
+@font-face {
+  font-family: 'Sansita';
+  src: url(./fonts/Sansita/Sansita-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Sansita';
+  src: url(./fonts/Sansita/Sansita-Black.ttf);
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: 'Open-Sans';
+  src: url(./fonts/Open-Sans/OpenSans-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Open-Sans';
+  src: url(./fonts/Open-Sans/OpenSans-Italic.ttf);
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Open-Sans';
+  src: url(./fonts/Open-Sans/OpenSans-Bold.ttf);
+  font-weight: 700;
+}
+
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/solid';
 @import '~@fortawesome/fontawesome-free/scss/regular';
@@ -13,4 +49,28 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 html,
 body {
   height: 100%;
+  background-color: $light;
+}
+
+p,
+th,
+td,
+h2,
+h3,
+h4,
+h5,
+button,
+input {
+  font-family: 'Open-Sans', sans-serif !important;
+}
+
+h1 {
+  background-image: url(./images/background.jpg);
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  background-position: bottom left;
+  color: transparent;
+  font-size: 2.5rem;
+  font-weight: 900;
+  font-family: 'Sansita', sans-serif;
 }
